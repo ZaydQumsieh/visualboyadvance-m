@@ -308,6 +308,7 @@ opt_desc opts[] = {
     INTOPT("geometry/windowY", "Y", wxTRANSLATE("Window axis Y position at startup"), windowPositionY, -1, 99999),
 
     /// UI
+    BOOLOPT("ui/allowBackgroundInput", "AllowBackgroundInput", wxTRANSLATE("Capture key events while on background"), allowBackgroundInput),
     BOOLOPT("ui/hideMenuBar", "", wxTRANSLATE("Hide menu bar when mouse is inactive"), gopts.hide_menu_bar),
 
     /// Sound

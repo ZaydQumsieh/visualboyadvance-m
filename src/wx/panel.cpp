@@ -18,6 +18,7 @@
 #include "wxvbam.h"
 #include "wxutil.h"
 #include "wayland.h"
+#include "background-input.h"
 
 #ifdef __WXMSW__
 #include <windows.h>
@@ -548,6 +549,8 @@ void GameArea::UnloadGame(bool destruct)
     emusys = NULL;
     soundShutdown();
 
+    disableKeyboardBackgroundInput();
+
     if (destruct)
         return;
 
@@ -1057,6 +1060,10 @@ void GameArea::OnIdle(wxIdleEvent& event)
 
         w->SetBackgroundStyle(wxBG_STYLE_CUSTOM);
         w->SetSize(wxSize(basic_width, basic_height));
+
+        // Allow input while on background
+        if (allowBackgroundInput)
+            enableKeyboardBackgroundInput(w);
 
         if (maxScale)
             w->SetMaxSize(wxSize(basic_width * maxScale,

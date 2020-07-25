@@ -260,6 +260,7 @@ uint32_t throttle = 100;
 uint32_t speedup_throttle = 0;
 uint32_t speedup_frame_skip = 9;
 bool speedup_throttle_frame_skip = true;
+bool allowBackgroundInput = false;
 
 const char* preparedCheatCodes[MAX_CHEATS];
 
@@ -477,6 +478,7 @@ void ValidateConfig()
 void LoadConfig()
 {
 	agbPrint = ReadPrefHex("agbPrint");
+	allowBackgroundInput = ReadPref("allowBackgroundInput", false);
 	autoFireMaxCount = fromDec(ReadPrefString("autoFireMaxCount"));
 	autoFrameSkip = ReadPref("autoFrameSkip", 0);
 	autoLoadMostRecent = ReadPref("autoLoadMostRecent", 0);

@@ -729,6 +729,7 @@ add_custom_command(
 set(
     SRC_WX
     wxvbam.cpp
+    background-input.cpp
     guiinit.cpp
     viewers.cpp
     gfxviewers.cpp
@@ -762,6 +763,7 @@ endif()
 set(
     HDR_WX
     wxvbam.h
+    background-input.h
     wxlogdebug.h
     drawing.h
     filters.h

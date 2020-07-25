@@ -1565,6 +1565,26 @@ EVT_HANDLER(JoypadAutoholdStart, "Autohold Start (toggle)")
     GetMenuOptionInt(keyName, autohold, keym);
 }
 
+#include "background-input.h"
+
+EVT_HANDLER(AllowBackgroundInput, "Allow background input (toggle)")
+{
+    bool menuPress;
+    GetMenuOptionBool("AllowBackgroundInput", menuPress);
+    toggleBooleanVar(&menuPress, &allowBackgroundInput);
+    SetMenuOption("AllowBackgroundInput", allowBackgroundInput ? 1 : 0);
+
+    disableKeyboardBackgroundInput();
+
+    if (allowBackgroundInput) {
+        if (panel && panel->panel) {
+            enableKeyboardBackgroundInput(panel->panel->GetWindow());
+        }
+    }
+
+    update_opts();
+}
+
 EVT_HANDLER_MASK(LoadGameRecent, "Load most recent save", CMDEN_SAVST)
 {
     panel->LoadState();
