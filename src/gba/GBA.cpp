@@ -3696,6 +3696,10 @@ static void gbaUpdateJoypads(void)
     }
 }
 
+#include <iostream>
+#include <fstream>
+#include "../args.h"
+
 void CPULoop(int ticks)
 {
     int clockTicks;

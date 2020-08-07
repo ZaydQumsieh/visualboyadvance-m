@@ -18,6 +18,8 @@ extern "C" {
 #include <cerrno>
 #include <unistd.h>
 
+#include <string>
+
 #include "../common/Patch.h"
 #include "../common/ConfigManager.h"
 #include "../gba/GBA.h"
@@ -32,6 +34,8 @@ extern "C" {
 #include "../gb/gbCheats.h"
 #include "../gb/gbSound.h"
 #include "../Util.h"
+
+#include "../args.h"
 
 #ifndef _WIN32
 #define GETCWD getcwd
@@ -855,6 +859,9 @@ static char *xstrdup(const char *s)
 
 int ReadOpts(int argc, char ** argv)
 {
+	NUMBER_OF_TICKS = std::stoi(argv[2]);
+	instruction_log.resize(NUMBER_OF_TICKS);
+
 	int op = -1;
 	while ((op = getopt_long(argc,
 		argv,

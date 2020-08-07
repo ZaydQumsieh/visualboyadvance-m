@@ -1997,6 +1997,12 @@ static insnfunc_t thumbInsnTable[1024] = {
 
 // Wrapper routine (execution loop) ///////////////////////////////////////
 
+#include "../args.h"
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <sstream>
+
 int thumbExecute()
 {
     do {
@@ -2009,6 +2015,25 @@ int thumbExecute()
 
         uint32_t opcode = cpuPrefetch[0];
         cpuPrefetch[0] = cpuPrefetch[1];
+
+        if (ticks_so_far >= NUMBER_OF_TICKS) {
+            std::ofstream instruction_file;
+            instruction_file.open("test.txt");
+
+            for (int i = 0; i < NUMBER_OF_TICKS; i++) {
+                instruction_file << instruction_log[i] << std::endl;
+            }
+
+            instruction_file.close();
+            exit(0);
+        }
+
+
+        std::stringstream stream;
+        stream << std::hex << opcode;
+        std::string result( stream.str() );
+        instruction_log[ticks_so_far] = "THM 0x" + result;
+        ticks_so_far += 1;
 
         busPrefetch = false;
         if (busPrefetchCount & 0xFFFFFF00)

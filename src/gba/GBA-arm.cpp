@@ -2830,6 +2830,12 @@ static void tester(void) {
 }
 #endif
 
+#include "../args.h"
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <sstream>
+
 int armExecute()
 {
     do {
@@ -2840,8 +2846,26 @@ int armExecute()
         if ((armNextPC & 0x0803FFFF) == 0x08020000)
             busPrefetchCount = 0x100;
 
+        if (ticks_so_far >= NUMBER_OF_TICKS) {
+            std::ofstream instruction_file;
+            instruction_file.open("test.txt");
+
+            for (int i = 0; i < NUMBER_OF_TICKS; i++) {
+                instruction_file << instruction_log[i] << std::endl;
+            }
+
+            instruction_file.close();
+            exit(0);
+        }
+
         uint32_t opcode = cpuPrefetch[0];
         cpuPrefetch[0] = cpuPrefetch[1];
+
+        std::stringstream stream;
+        stream << std::hex << opcode;
+        std::string result( stream.str() );
+        instruction_log[ticks_so_far] = "ARM 0x" + result;
+        ticks_so_far += 1;
 
         busPrefetch = false;
         if (busPrefetchCount & 0xFFFFFE00)
