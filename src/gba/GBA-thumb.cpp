@@ -2018,7 +2018,8 @@ int thumbExecute()
 
         if (ticks_so_far >= NUMBER_OF_TICKS) {
             std::ofstream instruction_file;
-            instruction_file.open("test.txt");
+            std::string name = "out.log";
+            instruction_file.open(name);
 
             for (int i = 0; i < NUMBER_OF_TICKS; i++) {
                 instruction_file << instruction_log[i] << std::endl;
