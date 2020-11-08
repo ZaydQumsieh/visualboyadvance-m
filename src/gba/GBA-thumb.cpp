@@ -2029,11 +2029,18 @@ int thumbExecute()
             exit(0);
         }
 
-
         std::stringstream stream;
         stream << std::hex << opcode;
+
+        for (int i = 0; i < 17; i++) {
+            stream << " " << std::hex << reg[i].I;
+        }
+
+        stream << " " << std::hex << (uint32_t) CPUReadByte(0x03000003);
+        
         std::string result( stream.str() );
         instruction_log[ticks_so_far] = "THM 0x" + result;
+        std::cout << std::to_string(ticks_so_far) << std::endl;
         ticks_so_far += 1;
 
         busPrefetch = false;
