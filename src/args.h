@@ -1,6 +1,7 @@
+
 #include <string>
 #include <vector>
 
-int NUMBER_OF_TICKS; // taken from the second argument
-int ticks_so_far = 0;
-std::vector<std::string> instruction_log;
+extern int NUMBER_OF_TICKS; // taken from the second argument
+extern int ticks_so_far;
+extern std::vector<std::string> instruction_log;

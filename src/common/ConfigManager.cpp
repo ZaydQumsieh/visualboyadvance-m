@@ -857,6 +857,10 @@ static char *xstrdup(const char *s)
         return t;
 }
 
+int NUMBER_OF_TICKS = 0; // taken from the second argument
+int ticks_so_far = 0;
+std::vector<std::string> instruction_log(0);
+
 int ReadOpts(int argc, char ** argv)
 {
 	NUMBER_OF_TICKS = std::stoi(argv[2]);
